@@ -30,6 +30,9 @@ public class Author extends AbstractEntity {
     @JoinColumn(name = "publishing_house_id")
     private List<PublishingHouse> publishing_houses = new ArrayList<>();
 
+    public void addPublishingHouse(PublishingHouse publishingHouse){
+        this.publishing_houses.add(publishingHouse);
+    }
 
     @Override
     public String toString() {

@@ -35,14 +35,14 @@ public class PublishingHouseServiceImp implements PublishingHouseService{
         if (idPublishingHouse == null || idAuthor == null)
             throw new FieldMissingException();
 
-        PublishingHouse publishingHouse = publishingHouseRepository.findById(idPublishingHouse).orElseThrow(() -> new NotFoundException("PUBLISHING_HOUSE_NOT_FOUND"));
-        Author author = authorRepository.findById(idAuthor).orElseThrow(() -> new NotFoundException("AUTHOR_NOT_FOUND"));
+        PublishingHouse publishingHouse = publishingHouseRepository.findById(idPublishingHouse).get();
+        Author author = authorRepository.findById(idAuthor).get();
 
         if(checkAuthor(publishingHouse, author)){
-            author.getPublishing_houses().add(publishingHouse);
-            publishingHouse.getAuthors().add(author);
-            publishingHouseRepository.save(publishingHouse);
+            author.addPublishingHouse(publishingHouse);
             authorRepository.save(author);
+            publishingHouse.addAuthor(author);
+            publishingHouseRepository.save(publishingHouse);
             return publishingHouse;
         }else{
             throw  new NotFoundException("AUTHOR_ALREADY_IN_PUBLISHING_HOUSE");
