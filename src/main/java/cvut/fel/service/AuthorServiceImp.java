@@ -5,7 +5,9 @@ import cvut.fel.exception.FieldMissingException;
 import cvut.fel.exception.NotFoundException;
 import cvut.fel.repository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AuthorServiceImp implements AuthorService {
     private final AuthorRepository authorRepository;
 

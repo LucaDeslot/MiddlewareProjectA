@@ -7,6 +7,7 @@ import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import java.util.ArrayList;
@@ -24,9 +25,9 @@ public class Author extends AbstractEntity {
     @JoinColumn(name = "book_id")
     private List<Book> books = new ArrayList<>();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @Cascade({ CascadeType.SAVE_UPDATE, CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(name = "publishinghouse_id")
+    @JoinColumn(name = "publishing_house_id")
     private List<PublishingHouse> publishing_houses = new ArrayList<>();
 
 

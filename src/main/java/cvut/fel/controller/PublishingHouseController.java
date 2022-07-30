@@ -7,8 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
 
+@RestController
 public class PublishingHouseController {
+    @Autowired
     private final PublishingHouseService publishingHouseService;
     private final DTOMapper dtoMapper;
 
@@ -18,8 +21,12 @@ public class PublishingHouseController {
         this.dtoMapper = dtoMapper;
     }
 
-    @GetMapping("/address/{id}")
+    @GetMapping("/publishingHouse/{id}")
     public ResponseEntity<PublishingHouseDTO> getAccountById(@PathVariable Long id) {
         return ResponseEntity.ok(dtoMapper.publishingHouseToDto(publishingHouseService.findById(id)));
+    }
+
+    public ResponseEntity<PublishingHouseDTO> createContract(@PathVariable Long idPublishingHouse, Long idAuthor){
+        return ResponseEntity.ok(dtoMapper.publishingHouseToDto(publishingHouseService.createContract(idPublishingHouse, idAuthor)));
     }
 }

@@ -6,11 +6,16 @@ import cvut.fel.exception.FieldMissingException;
 import cvut.fel.exception.NotFoundException;
 import cvut.fel.repository.BookRepository;
 import cvut.fel.repository.LibraryRepository;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class LibraryServiceImp implements LibraryService{
     private final LibraryRepository libraryRepository;
     private final BookRepository bookRepository;
+
 
     @Autowired
     public LibraryServiceImp(LibraryRepository libraryRepository, BookRepository bookRepository) {
