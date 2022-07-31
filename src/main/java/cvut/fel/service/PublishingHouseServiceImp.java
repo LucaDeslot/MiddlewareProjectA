@@ -62,7 +62,7 @@ public class PublishingHouseServiceImp implements PublishingHouseService{
 
     }
 
-    public void publishNewBook(Long idBook, Long idPublishingHouse){
+    public PublishingHouse publishNewBook(Long idBook, Long idPublishingHouse){
         if (idBook == null || idPublishingHouse == null)
             throw new FieldMissingException();
 
@@ -72,6 +72,7 @@ public class PublishingHouseServiceImp implements PublishingHouseService{
         if(checkBookNotPublished(publishingHouse, book)){
             publishingHouse.addPublishedBook(book);
             publishingHouseRepository.save(publishingHouse);
+            return publishingHouse;
         }else{
             throw  new NotFoundException("BOOK_ALREADY_PUBLISHED");
         }

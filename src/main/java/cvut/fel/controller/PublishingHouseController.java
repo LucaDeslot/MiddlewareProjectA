@@ -29,4 +29,9 @@ public class PublishingHouseController {
     public ResponseEntity<PublishingHouseDTO> createContract(@PathVariable Long idPublishingHouse, Long idAuthor){
         return ResponseEntity.ok(dtoMapper.publishingHouseToDto(publishingHouseService.createContract(idPublishingHouse, idAuthor)));
     }
+
+    public ResponseEntity<PublishingHouseDTO> publishNewBook(@PathVariable Long idBook, Long idPublishingHouse){
+        return ResponseEntity.ok(dtoMapper.publishingHouseToDto(publishingHouseService.publishNewBook(idBook, idPublishingHouse)));
+    }
+
 }
