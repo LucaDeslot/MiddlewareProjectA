@@ -1,44 +1,62 @@
-# Semestrální práce SIN
-### Dominik Dvořáček
+# Middleware_Project_A
 
-## Povinná část
-- BO layer (`package entity`)
-    - UML class diagram ve složce `/doc`
-- Repository (`package repository`)
-- Service layer (`package service`)
-    - Sequence diagram ve složce `/doc/sequence-diagrams`
-- Controller layer (`package controller`)
-    - REST controller
+## Description - Library
 
-## Volitelná část (8 bodů)
-- testy unit kazda trida na service layer a controller layer (`test.java.cvut.fel`)
-- design patternu alespon 6
-    - Builder: `dto.request.BookCreate`
-        - realizováno pomocí lombok `@Builder` anotace
-    - Singleton: `test.java.cvut.fel.utils.Generator`
-    - Chain of responsibility: `controller.interceptors`
-      - realizováno pomocí implementace interceptoru: metoda preHandle je jeden z 
-        článků chain of responsibility zpravávajícího http request
-    - Strategy: `controller.interceptors`
-      - interceptor pro logování byl doplněn o výběr strategie logování.
-        K dispozici jsou dvě strategie - Detailed a Short. Přepínání mezi strategiemi se provádí
-        v `application.properties` změnou atributu `requestLogging.detail`
-    - Prototype: `package dto`
-      - dto třídy implementují návrhový vzor prototype
-    - Facade: `repository.SaveEntityFascade`
-        - Třida která seskupuje save metody všech repository. Tyto metody byly hojně využívány při adhoc testování 
-          funkcí aplikace, proto byla vytvořena fasáda, který odbourává nutnost injektace jednotlivých repository.
-- interceptor (`controller.interceptors`)
-    - logování zpracování requestu serverem
-- další dokumentace UML: diagram nasazení, package diagram (složka `/doc`)
-- statická analýza kódu (FindBugs) složka `find-bugs`
-    - výpis pred opravou chyb, výpis po opravení chyb
-- Springfox (`config.SpringFoxConfig`)
-    - Springfox Swagger: http://localhost:8080/swagger-ui/
-- Javadoc cele aplikace (složka `/javadoc`)
-- mapstruct, convertory, DTO vrstva (`package dto`)
+It is necessary to design and implement a central information system for libraries designed for
+book registration. Such a system registers libraries, publishing houses, books and authors.
+Authors have contracts with several publishing houses for which they write books. Publishing
+houses publish these books. A book can have several authors and is published by just one
+publishing house. There can be a maximum of 5 identical books in a library.
+The library has a name, address and ownership of the book.
+The book has a unique ISBN identifier. When inserting a new book into the system, it is
+necessary to verify that its ISBN is not yet included in the system and that the specified author
+has a contract with the specified publishing house. The book also has the title, authors,
+publisher, publication date, genre, etc.
+The publishing house has a name, address, authors with whom it has a contract, and published
+books.
+The author has a name, surname, e-mail, books written, publishing house with which he has a
+contract, etc.
 
-### Resources
-Article link :  https://www.mkyong.com/spring-boot/spring-boot-spring-data-jpa/  
-Interceptors :  https://www.baeldung.com/spring-mvc-handlerinterceptor  
-EAR eshop :     https://gitlab.fel.cvut.cz/ear/b211-eshop/-/tree/main/  
+## Colaborators : 
+
+- Paulin Zumstein
+- Luca Deslot
+- Samuel Ohayon
+- Dylan Pereira
+
+## Tasks done : 
+
+- Analyze the task and create a class diagram.
+  
+- According to the design, implement the ORM in Java (choose the technology yourself:
+  hibernate, etc.).
+  - Use lombok for easy getters, setters , constructors etc.
+  - In your project use M:N cardinality:
+  - Find out what the fetch and mappedBy parameters mean
+- Implement DAO layer and CRUD.
+  
+- Describe the following three services using a sequence diagram:
+  - The author concludes a contract with the publishing house.
+  - The publishing house will publish a new book.
+  - Adding a book to the library
+  
+- Implement the services layer, according to sequence diagrams.
+  
+- Test service layer of application:
+  - unit tests
+  
+- Create an import.sql file in the resources folder. Create test data here.
+
+## Tasks not done :
+
+
+  
+- Add actuator
+
+- Add Springfox for generating swagger specification:
+  
+- Add javadoc
+  
+- Add Micrometer for metrics
+  
+- For DTO layer use mapstruct maping between BO and DTO:
